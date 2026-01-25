@@ -67,6 +67,30 @@ section {
     position: relative;
 }
 
+.section-text {
+    text-align: center;
+    margin-bottom: 65px;
+}
+
+.section-text .section-title {
+   font-family: "Space Grotesk", sans-serif;
+    font-size: 2.3rem;    
+    font-weight: 700;       
+    margin-bottom: 16px;
+}
+
+.section-title span {
+    color: #FA8938;
+}
+.section-subtitle {
+    color: #6b7280;
+    font-size: 1.2rem;
+    font-weight: 400;
+    max-width: 42rem;
+    margin: 0 auto;
+}
+
+
 .glass {
     /* background:  rgba(255, 255, 255, 0.048); */
     background: hsl(220 18% 10% / .7);
@@ -454,30 +478,6 @@ nav {
     }
 }
 
-.skills-text {
-    text-align: center;
-    margin-bottom: 65px;
-}
-
-.skills-text .skill-title {
-   font-family: "Space Grotesk", sans-serif;
-    font-size: 2.3rem;    
-    font-weight: 700;       
-    margin-bottom: 16px;
-}
-
-.skill-title span {
-    color: #FA8938;
-}
-.skill-subtitle {
-    color: #6b7280;
-    font-size: 1.2rem;
-    font-weight: 400;
-    max-width: 42rem;
-    margin: 0 auto;
-}
-
-
 .skills-cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -547,4 +547,14 @@ nav {
 .skill-tag:hover{
     background: hsl(var(--primary));
     color: black;
+}
+
+/* Projects-Section */
+.project-section {
+    padding: 128px 0;
+}
+.projects-container{
+    max-width: 72rem;
+    padding: 0 40px;
+    margin: 0 auto;
 }
