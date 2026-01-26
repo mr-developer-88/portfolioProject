@@ -608,3 +608,14 @@ nav {
     align-items: start;
     margin-bottom: 16px;
 }
+.card-social-icon {
+    padding: 0.5rem;
+    color: hsl(var(--primary));
+    background: hsl(var(--primary) / .1);
+    border-radius: 10px;
+}
+
+.card-social-icon svg {
+    display: block;
+    vertical-align: middle;
+}
