@@ -595,11 +595,19 @@ nav {
     background: var(--gradient-card);
     box-shadow: var(--shadow-card);
 }
+.project-card:hover {
+    .project-card-title {
+        color: hsl(var(--primary));
+        transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+    transition-duration: .15s;
+    }
+}
 
 .project-card-main {
     padding: 24px;
     border-color: hsl(var(--border));
-    border-bottom-width: 1px;
+    border-bottom: 2px solid hsl(var(--border));
 }
 
 .card-social {
@@ -618,4 +626,54 @@ nav {
 .card-social-icon svg {
     display: block;
     vertical-align: middle;
+}
+
+.project-card-live-link {
+    display: flex;
+    gap: .75rem;
+}
+
+.project-card-live-link a {
+    color: hsl(var(--muted-foreground));
+        transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+    transition-duration: .15s;
+}
+.project-card-live-link a i {
+    font-size: 17px;
+}
+
+.project-card-live-link a:hover {
+    color: hsl(var(--primary));
+}
+
+.project-card-title {
+    font-family: "Space Grotesk", system-ui, sans-serif;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    margin-bottom: .5rem;
+}
+
+.project-card-description {
+    color: hsl(var(--muted-foreground));
+    font-size: 15px;
+    line-height: 1.625;
+}
+
+.project-card-tags {
+    padding: 1rem 1.5rem 1.5rem 1.5rem; 
+}
+
+.project-card-tags .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+.project-card-tags .tags span {
+    color: hsl(var(--muted-foreground));
+    font-weight: 500;
+    font-size: .75rem;
+    line-height: 1rem;
 }
