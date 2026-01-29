@@ -677,3 +677,9 @@ nav {
     font-size: .75rem;
     line-height: 1rem;
 }
+
+.web-project-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0px, 1fr));
+    gap: 1.5rem;
+}
