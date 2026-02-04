@@ -918,13 +918,15 @@ color: rgb(34 197 94);
     padding: 2rem;
     text-align: center;
     box-shadow: var(--shadow-card);
-    transition-property: all;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 0.3s;
-    animation-duration: 0.3s;
+    transition: 0.3s ease-in-out;
     overflow: hidden;
     border-radius: 0.75rem;
     background: var(--gradient-card);
+    transform: scale(1);
+}
+.contact-content-card:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: scale(1.05);
 }
 
 .contact-card-info {
@@ -1022,4 +1024,90 @@ color: rgb(34 197 94);
     height: 20px;
     display: block;
     vertical-align: middle;
+}
+
+.contact-socials .big-btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    font-size: 1.2rem;
+    text-decoration: none;
+    border-radius: .75rem;
+    border: 1px solid hsl(var(--border));
+    padding: 12px;
+    font-weight: 500;
+    color: hsl(var(--foreground));
+    background-color: rgb(34 197 94);
+    transition: 0.2s ease-in-out;
+}
+.contact-socials .big-btns:hover {
+    background-color: rgb(34 197 94);
+    color: black;
+    border: 1px solid rgb(34 197 94);
+}
+
+.contact-socials .scnd {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+}
+
+.contact-socials .scnd:hover {
+    background: #f89148;
+    border: 1px solid hsl(var(--primary));
+}
+
+.after-social-links-paragraph {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    color: hsl(var(--muted-foreground));
+    text-align: center;
+}
+
+/* Footer */
+footer {
+    padding: 32px;
+    border: 1px solid hsl(var(--border));
+    background:hsl(220 18% 10% / .7);
+}
+
+.footer-container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 72rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+@media (min-width: 640px) {
+    .footer-container {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+    @media (min-width: 1024px) {
+        .footer-container {
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+    }
+
+.footer-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+@media (max-width: 640px) {
+    .footer-text {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+.footer-text p {
+    color: hsl(var(--muted-foreground));
+    font-size: 0.875rem;
+    line-height: 1.25rem;
 }
