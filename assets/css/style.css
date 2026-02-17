@@ -60,6 +60,27 @@ body {
     color: white;
     line-height: 1.7;
     overflow-x: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(250, 137, 56, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(250, 137, 56, 0.05) 0%, transparent 50%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+body.loaded {
+    opacity: 1;
 }
 
 section {
@@ -176,7 +197,6 @@ nav {
 .hire-btn {
     color: black;
     letter-spacing: 2px;
-    /* text-transform: uppercase; */
     background-color: #FA8938;
     text-decoration: none;
     border-radius: 16px;
@@ -188,6 +208,21 @@ nav {
 
 .hire-btn:hover {
     background-color: rgba(255, 166, 0, 0.918);
+}
+
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1001;
+}
+
+.mobile-menu-btn i {
+    transition: transform 0.3s ease;
 }
 
 /* MAIN CONTENT */
@@ -496,6 +531,12 @@ nav {
     transition-timing-function: cubic-bezier(.4, 0, .2, 1);
     transition-duration: .3s;
     animation-duration: .3s;
+    cursor: pointer;
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-card-hover);
 }
 
 .card-title {
@@ -594,7 +635,15 @@ nav {
     border-radius: .75rem;
     background: var(--gradient-card);
     box-shadow: var(--shadow-card);
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-card-hover);
+}
+
 .project-card:hover {
     .project-card-title {
         color: hsl(var(--primary));
@@ -703,7 +752,7 @@ nav {
     display: flex;
     gap: 1rem;
     padding: 1.5rem;
-  box-shadow: var(--shadow-card);
+    box-shadow: var(--shadow-card);
     transition-property: all;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 0.3s;
@@ -711,6 +760,12 @@ nav {
     overflow: hidden;
     border-radius: 0.75rem;
     background: var(--gradient-card);
+    cursor: pointer;
+}
+
+.education-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-card-hover);
 }
 
 .education-card-icon {
@@ -811,7 +866,7 @@ nav {
     display: flex;
     gap: 1rem;
     padding: 1.25rem;
-  box-shadow: var(--shadow-card);
+    box-shadow: var(--shadow-card);
     transition-property: all;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 0.3s;
@@ -819,6 +874,12 @@ nav {
     overflow: hidden;
     border-radius: 0.75rem;
     background: var(--gradient-card);
+    cursor: pointer;
+}
+
+.certification-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card-hover);
 }
 
 .certification-card-social {
@@ -1110,4 +1171,199 @@ footer {
     color: hsl(var(--muted-foreground));
     font-size: 0.875rem;
     line-height: 1.25rem;
+}
+
+/* Scroll to Top Button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: hsl(var(--primary));
+    color: black;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 999;
+    box-shadow: 0 4px 15px rgba(250, 137, 56, 0.4);
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-to-top:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(250, 137, 56, 0.6);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .hero-container {
+        margin: 0 80px;
+    }
+    
+    .skills-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .web-project-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    .navbar {
+        position: relative;
+    }
+    
+    .navlist {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: hsl(220 18% 10% / 0.98);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        transition: right 0.4s ease;
+        z-index: 1000;
+        border-left: 1px solid hsl(220 15% 18%);
+    }
+    
+    .navlist.active {
+        right: 0;
+    }
+    
+    .navlist li a {
+        font-size: 20px;
+    }
+    
+    .hire-btn {
+        display: none;
+    }
+    
+    .hero-container {
+        margin: 0 20px;
+        padding: 60px 20px;
+    }
+    
+    .hero-text {
+        font-size: 2.5rem;
+    }
+    
+    .hero-paragraph {
+        font-size: 1rem;
+    }
+    
+    .hero-btn {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .hero-btn .pri-btn,
+    .hero-btn .sec-btn {
+        width: 100%;
+    }
+    
+    .skills-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .project-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .web-project-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .certification-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    section {
+        padding: 60px 5%;
+    }
+    
+    .section-text .section-title {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 28px;
+    }
+    
+    .hero-text {
+        font-size: 2rem;
+    }
+    
+    .social-icons {
+        gap: 15px;
+    }
+    
+    .social-icons a i {
+        font-size: 18px;
+        padding: 10px;
+    }
+    
+    .about-img img {
+        width: 10rem;
+        height: 10rem;
+    }
+    
+    .section-text .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .scroll-to-top {
+        width: 45px;
+        height: 45px;
+        bottom: 20px;
+        right: 20px;
+    }
 }

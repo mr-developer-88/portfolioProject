@@ -4,12 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Asim - Frontend Developer Portfolio. Passionate about building responsive web applications with React, Next.js, and modern web technologies.">
+    <meta name="keywords" content="Frontend Developer, Web Developer, React, Next.js, JavaScript, Portfolio">
+    <meta name="author" content="Muhammad Asim">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Asim | Portfolio</title>
 </head>
 
-<body>
+<body class="loaded">
     <header>
 
         <nav class="glass">
@@ -17,14 +20,19 @@
                 <h1 class="logo">Asim</h1>
 
                 <ul class="navlist">
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#project">Project</a></li>
-                    <li><a href="#education">Education</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#skills" class="nav-link">Skills</a></li>
+                    <li><a href="#project" class="nav-link">Project</a></li>
+                    <li><a href="#education" class="nav-link">Education</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
 
                 <a href="#contact" class="hire-btn">HireMe</a>
+                
+                <button class="mobile-menu-btn" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
         </nav>
 
@@ -92,7 +100,7 @@
         <section class="about-section" id="about">
             <div class="about-container">
                 <div class="about-img">
-                    <img src="./assets/imgs/ASIM.jpeg" alt="ASIM">
+                    <img src="./assets/imgs/ASIM.jpeg" alt="ASIM" loading="lazy">
                 </div>
                 <div class="about-text">
                     <h2 class="about-title">
@@ -552,6 +560,13 @@
             </div>
         </div>
     </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="./assets/js/script.js"></script>
 </body>
 
 </html>
