@@ -1,4 +1,4 @@
-// Portfolio JavaScript - Professional & Optimized
+// Portfolio JavaScript - Clean & Optimized
 
 // ============================================
 // 1. MOBILE MENU FUNCTIONALITY
@@ -7,13 +7,11 @@ const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
 const navlist = document.querySelector('.navlist');
 const navLinks = document.querySelectorAll('.nav-link');
 
-// Toggle mobile menu
 if (mobileMenuBtn) {
     mobileMenuBtn.addEventListener('click', () => {
         navlist.classList.toggle('active');
         const icon = mobileMenuBtn.querySelector('i');
         
-        // Toggle icon between bars and times
         if (navlist.classList.contains('active')) {
             icon.classList.remove('fa-bars');
             icon.classList.add('fa-times');
@@ -57,7 +55,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const target = document.querySelector(this.getAttribute('href'));
         
         if (target) {
-            const offsetTop = target.offsetTop - 80; // Account for fixed navbar
+            const offsetTop = target.offsetTop - 80;
             window.scrollTo({
                 top: offsetTop,
                 behavior: 'smooth'
@@ -90,19 +88,17 @@ scrollToTopBtn.addEventListener('click', () => {
 // 4. NAVBAR SCROLL EFFECT
 // ============================================
 const navbar = document.querySelector('nav');
-let lastScroll = 0;
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
     
-    // Add shadow on scroll
     if (currentScroll > 50) {
         navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+        navbar.classList.add('scrolled');
     } else {
         navbar.style.boxShadow = 'none';
+        navbar.classList.remove('scrolled');
     }
-    
-    lastScroll = currentScroll;
 });
 
 // ============================================
@@ -113,11 +109,11 @@ const observerOptions = {
     rootMargin: '0px 0px -50px 0px'
 };
 
-const observer = new IntersectionObserver((entries) => {
+const fadeObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('fade-in-up');
-            observer.unobserve(entry.target);
+            fadeObserver.unobserve(entry.target);
         }
     });
 }, observerOptions);
@@ -129,25 +125,11 @@ const animateElements = document.querySelectorAll(
 
 animateElements.forEach(el => {
     el.style.opacity = '0';
-    observer.observe(el);
+    fadeObserver.observe(el);
 });
 
 // ============================================
-// 6. TYPING EFFECT FOR HERO TEXT
-// ============================================
-const heroTextElement = document.querySelector('.hero-text');
-if (heroTextElement) {
-    const originalText = heroTextElement.innerHTML;
-    heroTextElement.style.opacity = '1';
-    
-    // Add a subtle fade-in for hero section
-    setTimeout(() => {
-        document.querySelector('.hero-content').style.animation = 'fadeIn 1s ease-out';
-    }, 100);
-}
-
-// ============================================
-// 7. ACTIVE NAV LINK ON SCROLL
+// 6. ACTIVE NAV LINK ON SCROLL
 // ============================================
 const sections = document.querySelectorAll('section[id]');
 
@@ -169,14 +151,27 @@ function highlightNavLink() {
     });
 }
 
-window.addEventListener('scroll', highlightNavLink);
+// Debounce function for performance
+function debounce(func, wait = 10) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+window.addEventListener('scroll', debounce(highlightNavLink, 10));
 
 // ============================================
-// 8. LAZY LOADING IMAGES
+// 7. LAZY LOADING IMAGES
 // ============================================
 const images = document.querySelectorAll('img');
 
-const imageObserver = new IntersectionObserver((entries, observer) => {
+const imageObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             const img = entry.target;
@@ -195,60 +190,118 @@ const imageObserver = new IntersectionObserver((entries, observer) => {
 images.forEach(img => imageObserver.observe(img));
 
 // ============================================
-// 9. PERFORMANCE: DEBOUNCE SCROLL EVENTS
+// 8. CARD ANIMATIONS WITH STAGGER
 // ============================================
-function debounce(func, wait = 10) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
+const cards = document.querySelectorAll('.skill-card, .project-card, .education-card, .certification-card');
 
-// Apply debounce to scroll-heavy functions
-window.addEventListener('scroll', debounce(highlightNavLink, 10));
+const cardObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+            setTimeout(() => {
+                entry.target.classList.add('animate');
+            }, index * 100);
+            cardObserver.unobserve(entry.target);
+        }
+    });
+}, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+});
 
-// ============================================
-// 10. FORM VALIDATION (if you add a contact form later)
-// ============================================
-function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-}
+cards.forEach(card => cardObserver.observe(card));
 
 // ============================================
-// 11. PRELOADER (Optional - uncomment if needed)
+// 9. SECTION REVEAL ANIMATIONS
 // ============================================
-/*
-window.addEventListener('load', () => {
-    const preloader = document.querySelector('.preloader');
-    if (preloader) {
-        preloader.style.opacity = '0';
-        setTimeout(() => {
-            preloader.style.display = 'none';
-        }, 500);
+const allSections = document.querySelectorAll('section');
+
+const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+            sectionObserver.unobserve(entry.target);
+        }
+    });
+}, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+});
+
+allSections.forEach(section => {
+    if (!section.classList.contains('hero')) {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(20px)';
+        section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        sectionObserver.observe(section);
     }
 });
-*/
 
 // ============================================
-// 12. CONSOLE MESSAGE (Professional Touch)
+// 10. BUTTON RIPPLE EFFECT
 // ============================================
-console.log('%c👋 Hey there, Developer!', 'color: #FA8938; font-size: 20px; font-weight: bold;');
-console.log('%cInterested in the code? Check out the repo!', 'color: #6b7280; font-size: 14px;');
-console.log('%c🚀 Built with passion by Asim', 'color: #FA8938; font-size: 14px;');
+const createRipple = (event) => {
+    const button = event.currentTarget;
+    const ripple = document.createElement('span');
+    const diameter = Math.max(button.clientWidth, button.clientHeight);
+    const radius = diameter / 2;
+    
+    ripple.style.width = ripple.style.height = `${diameter}px`;
+    ripple.style.left = `${event.clientX - button.offsetLeft - radius}px`;
+    ripple.style.top = `${event.clientY - button.offsetTop - radius}px`;
+    ripple.classList.add('ripple');
+    
+    const existingRipple = button.getElementsByClassName('ripple')[0];
+    if (existingRipple) {
+        existingRipple.remove();
+    }
+    
+    button.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
+};
+
+document.querySelectorAll('.pri-btn, .sec-btn, .hire-btn').forEach(button => {
+    button.addEventListener('click', createRipple);
+});
 
 // ============================================
-// 13. INITIALIZE ON DOM LOAD
+// 11. PERFORMANCE OPTIMIZATIONS
+// ============================================
+
+// Reduce motion for accessibility
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('*').forEach(el => {
+        el.style.animation = 'none';
+        el.style.transition = 'none';
+    });
+}
+
+// Touch device detection
+const isTouchDevice = () => {
+    return (('ontouchstart' in window) ||
+            (navigator.maxTouchPoints > 0) ||
+            (navigator.msMaxTouchPoints > 0));
+};
+
+if (isTouchDevice()) {
+    document.body.classList.add('touch-device');
+} else {
+    document.body.classList.add('no-touch');
+}
+
+// Viewport height fix for mobile
+const setVH = () => {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+};
+
+setVH();
+window.addEventListener('resize', debounce(setVH, 100));
+
+// ============================================
+// 12. INITIALIZATION
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
-    // Add loaded class to body for CSS animations
     document.body.classList.add('loaded');
-    
-    // Initialize any third-party libraries here
-    console.log('Portfolio initialized successfully! ✨');
+    console.log('%c✨ Portfolio loaded successfully!', 'color: #FA8938; font-size: 16px; font-weight: bold;');
 });
