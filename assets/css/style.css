@@ -402,7 +402,7 @@ nav {
 
 @media (min-width: 640px) {
     .hero-text {
-        font-size: clamp(4rem, 6vw, 6rem); /* text-5xl (48px) */
+        font-size: clamp(2.5rem, 6vw, 6rem); /* text-5xl (48px) */
     }
 }
 
