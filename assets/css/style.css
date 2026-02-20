@@ -400,6 +400,12 @@ nav {
     color: orange;
 }
 
+@media (min-width: 640px) {
+    .hero-text {
+        font-size: clamp(4rem, 6vw, 6rem); /* text-5xl (48px) */
+    }
+}
+
 .hero-paragraph {
     font-size: 1.2rem;   
     font-weight: 500;
